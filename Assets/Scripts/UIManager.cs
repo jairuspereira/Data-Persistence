@@ -1,43 +1,42 @@
+
+using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
 public class UIManager : MonoBehaviour
 {
-    
-    public TMP_InputField nameInputField;
-
-    public TMP_Text score;
-
-    string scoreString;
+    public TMP_InputField playerNameInput;
+    public TMP_Text scoreDisplay;
 
     private void Start()
     {
-
-        scoreString = PlayerData.playerScore.ToString();
-        score.text = "High Score : " + scoreString;
-        
-
+        scoreDisplay.text = "";
+        foreach (var entry in PlayerData.playerData.scores)
+        {
+            scoreDisplay.text += entry.playerName + ": " + entry.score + "\n";
+        }
     }
 
-  
-    
     public void StartGame()
     {
-        PlayerData.playerName = nameInputField.text;
+        SaveInput();
         SceneManager.LoadScene(1);
     }
 
     public void EndGame()
     {
-        EditorApplication.ExitPlaymode();
+        Application.Quit();
     }
 
     public void GoToMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void SaveInput()
+    {
+        PlayerData.playerData.playerName = playerNameInput.text;
     }
 }

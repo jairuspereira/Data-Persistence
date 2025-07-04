@@ -2100,3 +2100,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameInputField: {fileID: 0}
+  scoreString: {fileID: 0}
